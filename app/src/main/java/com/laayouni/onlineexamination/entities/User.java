@@ -1,8 +1,9 @@
 package com.laayouni.onlineexamination.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private Long id;
     private String fullname;
     private String username;

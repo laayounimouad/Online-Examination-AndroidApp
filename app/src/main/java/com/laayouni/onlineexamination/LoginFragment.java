@@ -1,5 +1,6 @@
 package com.laayouni.onlineexamination;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.laayouni.onlineexamination.api.RestServiceApi;
 import com.laayouni.onlineexamination.entities.User;
+import com.laayouni.onlineexamination.utils.SessionManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +36,7 @@ public class LoginFragment extends Fragment {
     private EditText et_username,et_password;
     private Button btn_login;
     private User user=new User();
-
+    SessionManager session;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -68,6 +70,12 @@ public class LoginFragment extends Fragment {
                 .setLenient()
                 .create();
 
+        Toast.makeText(getView().getContext(),"login succeeded",Toast.LENGTH_LONG);
+        Intent intent=new Intent(getContext(),MenuHomeScreenActivity.class);
+        session = new SessionManager(getContext());
+        session.createLoginSession(newUser.getUsername(),newUser.getPassword());
+        startActivity(intent);
+        /*
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.155.158:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson)).build();
         RestServiceApi serviceAPI = retrofit.create(RestServiceApi.class);
@@ -78,6 +86,10 @@ public class LoginFragment extends Fragment {
                 User userResponse=response.body();
                 Log.i("info","sucess::: "+response.body());
                 Toast.makeText(getView().getContext(),"login succeeded",Toast.LENGTH_LONG);
+                Intent intent=new Intent(getContext(),Exams.class);
+                session = new SessionManager(getContext());
+                session.createLoginSession(userResponse.getUsername(),userResponse.getEmail() );
+                startActivity(intent);
             }
 
             @Override
@@ -86,5 +98,7 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getView().getContext(),"login failed",Toast.LENGTH_LONG);
             }
         });
+
+         */
     }
 }
