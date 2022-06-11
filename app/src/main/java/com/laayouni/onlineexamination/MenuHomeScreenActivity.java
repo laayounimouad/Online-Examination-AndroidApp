@@ -1,25 +1,18 @@
 package com.laayouni.onlineexamination;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.AttributeSet;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,19 +20,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.laayouni.onlineexamination.Category_Levels.All_Knowledge.AllKnowledgeQuizActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.laayouni.onlineexamination.entities.Choice;
 import com.laayouni.onlineexamination.entities.Question;
 import com.laayouni.onlineexamination.entities.Test;
+import com.laayouni.onlineexamination.utils.SessionManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class MenuHomeScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,22 +44,26 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
     Button navToggler_btn;
     LinearLayout linearLayout;
     Dialog dialog;
-    Button allKnowledge_btn;
     RecyclerView list;
-    private boolean mIsBound = false;
-
-    ///////////////////////////////////////////////////////////////////  BIND BACKGROUD MUSIC HERE  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    List<Test> testList;
+    TextInputEditText search_field;
+    Menu menu;
+    SessionManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); ///Eneter into fullscreen mode
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exams);
+        setContentView(R.layout.activity_list_qcm);
 
+        sm=new SessionManager(getApplicationContext());
+        if (!sm.isLoggedIn()){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            Toast.makeText(getApplicationContext(),"you need to log in first",Toast.LENGTH_LONG).show();
+            finish();
+        }
+        Toast.makeText(getApplicationContext(),sm.getUserDetails().get(sm.KEY_NAME),Toast.LENGTH_LONG).show();
 
 
         //Menu Hooks
@@ -73,11 +71,21 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
         navigationView = findViewById(R.id.nav_view);
         navToggler_btn = findViewById(R.id.action_menu_presenter);
         linearLayout = findViewById(R.id.main_content);
-        //allKnowledge_btn = findViewById(R.id.allknowledge_start);
+        search_field = findViewById(R.id.search_field);
         list = findViewById(R.id.list);
-        ///////////////////////////// diplaying exams /////////////////////////////
 
-        List<Test> testList=new ArrayList<>();
+
+        ///////////////////////////// diplaying exams /////////////////////////////
+        TextInputLayout ie= findViewById(R.id.textField);
+        ie.setStartIconOnClickListener(view -> {
+            list.setAdapter(new CustomAdapter(
+                    testList.stream().filter(test ->
+                            test.getName().contains(
+                                    (search_field).getText()
+                            )).collect(Collectors.toList())
+            ));
+        });
+        testList=new ArrayList<>();
         Test test1=new Test("flutter QCM");
         Test test2=new Test("Android Online Examination");
         Test test3=new Test("Hadoop And Spark final Exam");
@@ -122,27 +130,19 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
         navigationDrawer();
 
         dialog = new Dialog(this, R.style.AnimateDialog);
+        //userName=findViewById(R.id.userName);
+        //userName.setTitle(sm.getUserDetails().get(sm.KEY_NAME));
+
+        //menu=findViewById(R.id.menu);
+
+        //menu=navigationView.findViewById(R.id.menu);
+        //menu.findItem(R.id.userName).setTitle(sm.getUserDetails().get(sm.KEY_NAME));
+        navigationView
+                .getMenu()
+                .findItem(R.id.userName)
+                .setTitle(sm.getUserDetails()
+                        .get(sm.KEY_NAME));
     }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-
-        return super.onCreateView(name, context, attrs);
-    }
-///////////////////////////////////////////////////////////////////////////////  ALL CATEGORY SETUP FOR POP LEVEL DIALOG  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////deleted//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-    ///////////////////////////////////////////////////////////////////ALL ABOUT NAVIGATION DRAWER/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void navigationDrawer() {
 
@@ -163,7 +163,6 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
         });
 
         animateNavigationDrawer();
-
     }
 
     ////////////////////////////////////////////////////////////ANIMATE NAV DRAWER////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,6 +205,7 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.logout) {
             //Logout
+            sm.logoutUser();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
@@ -232,7 +232,14 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
     protected void onDestroy() {
         super.onDestroy();
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void onSearch(View view) {
+
+    }
+    //////////////////////////////
+    //
+
+    // //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

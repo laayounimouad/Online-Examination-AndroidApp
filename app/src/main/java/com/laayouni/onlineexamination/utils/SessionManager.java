@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.laayouni.onlineexamination.MainActivity;
+import com.laayouni.onlineexamination.entities.User;
 
 import java.util.HashMap;
 
@@ -22,10 +23,13 @@ public class SessionManager {
     private static final String PREF_NAME = "AndroidHivePref";
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
-    // User name (make variable public to access from outside)
+    // User name
     public static final String KEY_NAME = "name";
-    // Email address (make variable public to access from outside)
+    // Email address
     public static final String KEY_EMAIL = "email";
+    // Object User
+    public static final String KEY_USER = "user";
+
 
     // Constructor
     @SuppressLint("CommitPrefEdits")
@@ -38,13 +42,15 @@ public class SessionManager {
     /**
      * Create login session
      */
-    public void createLoginSession(String name, String email) {
+    public void createLoginSession(User user) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
         // Storing name in pref
-        editor.putString(KEY_NAME, name);
+        editor.putString(KEY_NAME, user.getUsername());
         // Storing email in pref
-        editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_EMAIL, user.getEmail());
+
+        editor.putString(KEY_USER, user.getEmail());
         // commit changes
         editor.commit();
     }

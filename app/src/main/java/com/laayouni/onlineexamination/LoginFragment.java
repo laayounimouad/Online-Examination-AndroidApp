@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,6 +38,7 @@ public class LoginFragment extends Fragment {
     private Button btn_login;
     private User user=new User();
     SessionManager session;
+    TextView errorText;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -56,13 +58,23 @@ public class LoginFragment extends Fragment {
         et_password=getView().findViewById(R.id.et_password);
         et_username=getView().findViewById(R.id.et_username);
         btn_login=getView().findViewById(R.id.btn_login);
-
+        errorText=getView().findViewById(R.id.errorText);
         btn_login.setOnClickListener(view1 -> {
-            user.setUsername(et_username.getText().toString());
-            user.setPassword(et_password.getText().toString());
+            user.setUsername(
+                    et_username.getText().length()==0?
+                            null:et_username.getText().toString()
+            );
+            user.setPassword(
+                    et_password.getText().length()==0?
+                            null:et_password.getText().toString()
+            );
             if(user.getUsername()!= null && user.getPassword()!=null){
                 loginUser(user);
             }
+            else {
+                errorText.setText("both username and password are necessary");
+            }
+
         });
     }
     private void loginUser(User newUser){
@@ -73,7 +85,7 @@ public class LoginFragment extends Fragment {
         Toast.makeText(getView().getContext(),"login succeeded",Toast.LENGTH_LONG);
         Intent intent=new Intent(getContext(),MenuHomeScreenActivity.class);
         session = new SessionManager(getContext());
-        session.createLoginSession(newUser.getUsername(),newUser.getPassword());
+        session.createLoginSession(newUser);
         startActivity(intent);
         /*
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.155.158:8080/api/")

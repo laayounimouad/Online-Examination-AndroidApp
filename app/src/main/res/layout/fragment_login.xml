@@ -87,4 +87,20 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"/>
 
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="369dp"
+        android:layout_height="47dp"
+        android:layout_above="@id/tv_title"
+        android:layout_below="@+id/btn_login"
+        android:layout_alignStart="@+id/btn_login"
+        android:layout_alignEnd="@+id/btn_login"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="-375dp"
+
+        android:gravity="center"
+        android:textColor="@color/red" />
+
 </RelativeLayout>

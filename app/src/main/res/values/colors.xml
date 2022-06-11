@@ -4,12 +4,13 @@
     <color name="colorPrimaryDark">#00695C</color>
     <color name="colorAccent">#FF4081</color>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_500">#00796b</color>
+    <color name="purple_700">#00695C</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FFDA0B0B</color>
 
 
 
@@ -17,7 +18,7 @@
     <color name="colorPrimaryDark">#2133A0</color>
     <color name="colorAccent">#7E79CC</color>-->
     <color name="nav_color">#E7E9FB</color>
-    <color name="cat_heading">#142588</color>
+    <color name="cat_heading">#00796b</color>
 
     <!--Sign In Colors-->
 
@@ -28,6 +29,6 @@
     <color name="header_color">#2133A0</color>
     <color name="Transparent">#00000000</color>
     <color name="light_blue">#1C8ED9</color>
-    <color name="gra_medium_blue">#2618A8</color>
+    <color name="gra_medium_blue">#FF03DAC5</color>
 
 </resources>

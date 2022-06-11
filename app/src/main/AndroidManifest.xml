@@ -18,7 +18,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".Category_Levels.All_Knowledge.AllKnowledgeQuizActivity"
+            android:name=".qcm.QcmActivity"
             android:exported="false" />
 
         <activity

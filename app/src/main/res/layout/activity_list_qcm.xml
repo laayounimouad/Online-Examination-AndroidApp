@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
-        android:theme="@style/nav_theme"
+        android:theme="@style/AppTheme"
         app:headerLayout="@layout/activity_nav_header_layout"
         app:menu="@menu/list_menu">
 
@@ -23,14 +23,15 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="@drawable/cat_bg"
         android:fadeScrollbars="true"
+
         android:scrollbarStyle="insideOverlay">
 
         <LinearLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical">
 
             <LinearLayout
@@ -42,7 +43,7 @@
                 <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#11228B">
+                    android:background="@color/colorPrimary">
 
                     <Button
                         android:id="@+id/action_menu_presenter"
@@ -54,8 +55,24 @@
 
                 </androidx.appcompat.widget.Toolbar>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Type exam name"
+                    app:startIconContentDescription="Name"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/search">
 
-                <androidx.recyclerview.widget.RecyclerView
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/search_field"
+                        android:onClick="onSearch" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+               <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list"
                     android:name="com.laayouni.onlineexamination.ItemFragment"
                     android:layout_width="match_parent"

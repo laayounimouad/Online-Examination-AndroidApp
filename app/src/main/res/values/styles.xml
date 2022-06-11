@@ -12,7 +12,7 @@
 
     <!-- Nav Drawer theme. -->
 <style name="nav_theme">
-    <item name="colorPrimary">@color/header_color</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorControlHighlight">@color/nav_color</item>
 
 </style>

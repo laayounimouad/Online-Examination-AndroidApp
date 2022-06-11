@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu">
 
         <group android:checkableBehavior="single">
 
@@ -12,7 +13,10 @@
         <item android:title="User">
 
             <menu>
-
+                <item
+                    android:id="@+id/userName"
+                    android:icon="@drawable/usericon"
+                    android:title="d" />
                 <group android:checkableBehavior="single">
 
                     <item
@@ -24,4 +28,5 @@
 
             </menu>
         </item>
+
     </menu>

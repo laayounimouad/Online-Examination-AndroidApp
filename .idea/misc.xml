@@ -3,19 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.178" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/btn_custom.xml" value="0.1975" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/et_custom.xml" value="0.1975" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1975" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_arrow_left.xml" value="0.1975" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_arrow_right.xml" value="0.1975" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_exit_to_app.xml" value="0.178" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_favorite.xml" value="0.115" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_gamepad.xml" value="0.115" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_home.xml" value="0.115" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_launcher_background.xml" value="0.178" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_menu_icon.xml" value="0.1975" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_person_black_24dp.xml" value="0.115" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_pp.xml" value="0.178" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_question.xml" value="0.178" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/ic_rate_review.xml" value="0.178" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/invite.xml" value="0.1975" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/main_btn.xml" value="0.1975" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/options_btn_bg.xml" value="0.1975" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/drawable/search.xml" value="0.178" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/font/righteous.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/font/roboto.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/font/roboto_bold.xml" value="0.13385416666666666" />
@@ -24,16 +31,18 @@
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_custom_popup.xml" value="0.1" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_exams.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_fail_20_layout.xml" value="0.25" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_list_qcm.xml" value="0.2685624012638231" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_main_questions_view.xml" value="0.25" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_nav_header_layout.xml" value="0.33" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_pass_100_layout.xml" value="0.10364583333333334" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_pass_50_layout.xml" value="0.10364583333333334" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_pass_70_layout.xml" value="0.5" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_qcm.xml" value="0.22" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/activity_score_layout.xml" value="0.33" />
-        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/fragment_item.xml" value="0.5" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/fragment_item.xml" value="0.33" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/fragment_item_list.xml" value="0.1953125" />
-        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/fragment_login.xml" value="0.209375" />
+        <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/layout/fragment_register.xml" value="0.209375" />
         <entry key="..\:/Users/mouad/Documents/Projects/onlineexamination/app/src/main/res/menu/list_menu.xml" value="0.209375" />
       </map>

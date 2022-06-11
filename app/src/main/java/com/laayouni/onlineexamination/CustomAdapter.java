@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.laayouni.onlineexamination.Category_Levels.All_Knowledge.AllKnowledgeQuizActivity;
+import com.laayouni.onlineexamination.qcm.QcmActivity;
 import com.laayouni.onlineexamination.entities.Test;
 
 import java.util.List;
@@ -67,7 +67,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         viewHolder.getTextView().setText(tests.get(position).toString());
 
         viewHolder.getButton().setOnClickListener(view1 -> {
-            Intent AK = new Intent(view1.getContext(), AllKnowledgeQuizActivity.class);
+            Intent AK = new Intent(view1.getContext(), QcmActivity.class);
             AK.putExtra("test",tests.get(position));
             view1.getContext().startActivity(AK);
         });

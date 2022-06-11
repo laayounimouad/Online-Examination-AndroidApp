@@ -1,15 +1,13 @@
-package com.laayouni.onlineexamination.Category_Levels.All_Knowledge;
+package com.laayouni.onlineexamination.qcm;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -30,14 +28,12 @@ import com.laayouni.onlineexamination.MenuHomeScreenActivity;
 import com.laayouni.onlineexamination.R;
 import com.laayouni.onlineexamination.entities.Question;
 import com.laayouni.onlineexamination.entities.Test;
-import com.laayouni.onlineexamination.questionsModelClass;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AllKnowledgeQuizActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class QcmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     static final float END_SCALE = 0.7f;
 
@@ -59,7 +55,7 @@ public class AllKnowledgeQuizActivity extends AppCompatActivity implements Navig
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); ///Eneter into fullscreen mode
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_questions_view);
+        setContentView(R.layout.activity_qcm);
 
 
 
@@ -115,7 +111,7 @@ public class AllKnowledgeQuizActivity extends AppCompatActivity implements Navig
                         });
 
                         try_again.setOnClickListener(v12 -> {
-                            Intent BG = new Intent(getApplicationContext(), AllKnowledgeQuizActivity.class); //If User get 20% let him or her play again
+                            Intent BG = new Intent(getApplicationContext(), QcmActivity.class); //If User get 20% let him or her play again
                             BG.putExtra("test",test);
                             startActivity(BG);
                             finish();
@@ -293,7 +289,7 @@ public class AllKnowledgeQuizActivity extends AppCompatActivity implements Navig
         if (menuItem.getItemId() == R.id.home) {
             Intent home = new Intent(getApplicationContext(), MenuHomeScreenActivity.class);
             startActivity(home);
-            AllKnowledgeQuizActivity.super.onBackPressed();
+            QcmActivity.super.onBackPressed();
 
         } else if (menuItem.getItemId() == R.id.logout) {
            // FirebaseAuth.getInstance().signOut();
