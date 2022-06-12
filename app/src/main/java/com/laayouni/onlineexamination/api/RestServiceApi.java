@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RestServiceApi {
     @GET("users/")
@@ -18,6 +19,9 @@ public interface RestServiceApi {
     Call<User> createUser(@Body User user);
     @POST("userauth/")
     Call<User> isPassCorrect(@Body User user);
+
+    @GET("tests")
+    Call<List<Test>> listTest(@Query("keyword") String keyword);
 
 }
 

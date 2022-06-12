@@ -101,8 +101,10 @@ public class QcmActivity extends AppCompatActivity implements NavigationView.OnN
                         dialog.setContentView(R.layout.activity_score_layout);
                         try_again = dialog.findViewById(R.id.try_again_btn);
                         promote_btn = dialog.findViewById(R.id.nl_btn);
+
                         TextView score_result = dialog.findViewById(R.id.score_result);
                         score_result.setText(score+"% Score");
+
                         promote_btn.setOnClickListener(v1 -> {
                             Intent BG = new Intent(getApplicationContext(), MenuHomeScreenActivity.class); ///If User get 70% let him to next category
                             startActivity(BG);
@@ -131,9 +133,6 @@ public class QcmActivity extends AppCompatActivity implements NavigationView.OnN
 
         navigationDrawer();
     }
-    ///////////////////////////////////////////////////////////////////ANIMATING SCREEN/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void playAnim(final View view, final int value, final String data) {
 
@@ -292,7 +291,6 @@ public class QcmActivity extends AppCompatActivity implements NavigationView.OnN
             QcmActivity.super.onBackPressed();
 
         } else if (menuItem.getItemId() == R.id.logout) {
-           // FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }

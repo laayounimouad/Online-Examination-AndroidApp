@@ -5,45 +5,6 @@ android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:layout_gravity="center"
 xmlns:app="http://schemas.android.com/apk/res-auto">
-<!--
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/allknow_bg" />
-
-    <TextView
-        android:id="@+id/quiz_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/righteous"
-        android:gravity="end"
-        android:text="@string/an_heading"
-        android:textColor="@color/white"
-        android:textSize="21sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/quiz_start"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:layout_below="@+id/quiz_name"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="38dp"
-        android:background="@drawable/an_btn" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
--->
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
@@ -92,6 +53,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 android:text="@string/an_heading" />
 
             <TextView
+                android:id="@+id/test_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

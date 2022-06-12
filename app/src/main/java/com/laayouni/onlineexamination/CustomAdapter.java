@@ -30,6 +30,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView quiz_name;
+        private final TextView test_owner;
         private final Button button;
 
         public ViewHolder(View view) {
@@ -37,6 +38,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             // Define click listener for the ViewHolder's View
             button = view.findViewById(R.id.quiz_start);
             quiz_name = view.findViewById(R.id.quiz_name);
+            test_owner = view.findViewById(R.id.test_owner);
         }
 
         public TextView getTextView() {
@@ -44,6 +46,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         }
         public Button getButton(){
             return button;
+        }
+        public TextView getTest_owner() {
+            return test_owner;
         }
     }
 
@@ -65,7 +70,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getTextView().setText(tests.get(position).toString());
-
+        viewHolder.getTest_owner().setText(tests.get(position).getOwner().getFullname());
         viewHolder.getButton().setOnClickListener(view1 -> {
             Intent AK = new Intent(view1.getContext(), QcmActivity.class);
             AK.putExtra("test",tests.get(position));

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,15 +26,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.laayouni.onlineexamination.api.RestServiceApi;
 import com.laayouni.onlineexamination.entities.Choice;
 import com.laayouni.onlineexamination.entities.Question;
 import com.laayouni.onlineexamination.entities.Test;
+import com.laayouni.onlineexamination.entities.User;
 import com.laayouni.onlineexamination.utils.SessionManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MenuHomeScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,7 +58,6 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
     RecyclerView list;
     List<Test> testList;
     TextInputEditText search_field;
-    Menu menu;
     SessionManager sm;
 
     @Override
@@ -63,7 +73,7 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
             Toast.makeText(getApplicationContext(),"you need to log in first",Toast.LENGTH_LONG).show();
             finish();
         }
-        Toast.makeText(getApplicationContext(),sm.getUserDetails().get(sm.KEY_NAME),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),sm.getUserDetails().get(sm.KEY_NAME),Toast.LENGTH_LONG).show();
 
 
         //Menu Hooks
@@ -85,63 +95,52 @@ public class MenuHomeScreenActivity extends AppCompatActivity implements Navigat
                             )).collect(Collectors.toList())
             ));
         });
-        testList=new ArrayList<>();
-        Test test1=new Test("flutter QCM");
-        Test test2=new Test("Android Online Examination");
-        Test test3=new Test("Hadoop And Spark final Exam");
 
-        test1.setQuestions(Arrays.asList(
-                new Question("what is flutter",Arrays.asList(
-                        new Choice("a programming language",false),
-                        new Choice("A Framework",true),
-                        new Choice("A music video",false),
-                        new Choice("flutter means nothing",false)
-                        )),
-                new Question("does flutter exist",Arrays.asList(
-                        new Choice("yeah obviously",false),
-                        new Choice("no you just made it up",true),
-                        new Choice("you are just imagining thing",false),
-                        new Choice("do you mean the flute ?",false)
-                ))
-        ));
-        test2.setQuestions(Arrays.asList(
-                new Question("so android ?",Arrays.asList(
-                        new Choice("what about it ?",false),
-                        new Choice("YES",true),
-                        new Choice("IOS is better",false),
-                        new Choice("linux",false)
-                )),
-                new Question("what does android mean",Arrays.asList(
-                        new Choice("I don't know",false),
-                        new Choice("you don't know",true),
-                        new Choice("google it",false),
-                        new Choice(".....",false)
-                ))
-        ));
-
-        testList.add(test1);
-        testList.add(test2);
-        testList.add(test3);
-
-            list.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
-
-        list.setAdapter(new CustomAdapter(testList));
+        getTest("");
 
         navigationDrawer();
 
         dialog = new Dialog(this, R.style.AnimateDialog);
-        //userName=findViewById(R.id.userName);
-        //userName.setTitle(sm.getUserDetails().get(sm.KEY_NAME));
-
-        //menu=findViewById(R.id.menu);
-
-        //menu=navigationView.findViewById(R.id.menu);
-        //menu.findItem(R.id.userName).setTitle(sm.getUserDetails().get(sm.KEY_NAME));
-        navigationView
+          navigationView
                 .getMenu()
                 .findItem(R.id.userName)
                 .setTitle(sm.getUserDetails()
                         .get(sm.KEY_NAME));
+    }
+
+    private void getTest(String keyword){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.41.158:8080/api/")
+                .addConverterFactory(GsonConverterFactory.create(gson)).build();
+        RestServiceApi serviceAPI = retrofit.create(RestServiceApi.class);
+        Call<List<Test>> callUsers = serviceAPI.listTest(keyword);
+        callUsers.enqueue(new Callback<List<Test>>() {
+            @Override
+            public void onResponse(Call<List<Test>> call, Response<List<Test>> response) {
+                if(response.isSuccessful()){
+                    //User userResponse=response.body();
+                    List<Test> listResponse=response.body();
+                    testList=listResponse;
+                    list.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
+
+                    list.setAdapter(new CustomAdapter(testList));
+
+                    //Toast.makeText(getApplicationContext(),"tests received",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Log.e("error","error in connection");
+                    Toast.makeText(getApplicationContext(),"an error had accured",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Test>> call, Throwable t) {
+                Log.e("error","error in connection"+t);
+                Toast.makeText(getApplicationContext(),"request failed",Toast.LENGTH_LONG);
+            }
+        });
     }
 
     private void navigationDrawer() {

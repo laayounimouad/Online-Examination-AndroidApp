@@ -82,35 +82,42 @@ public class LoginFragment extends Fragment {
                 .setLenient()
                 .create();
 
-        Toast.makeText(getView().getContext(),"login succeeded",Toast.LENGTH_LONG);
-        Intent intent=new Intent(getContext(),MenuHomeScreenActivity.class);
-        session = new SessionManager(getContext());
-        session.createLoginSession(newUser);
-        startActivity(intent);
-        /*
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.155.158:8080/api/")
+        //Toast.makeText(getView().getContext(),"login succeeded",Toast.LENGTH_LONG).show();
+        //Intent intent=new Intent(getContext(),MenuHomeScreenActivity.class);
+        //session = new SessionManager(getContext());
+        //session.createLoginSession(newUser);
+        //startActivity(intent);
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.41.158:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson)).build();
         RestServiceApi serviceAPI = retrofit.create(RestServiceApi.class);
         Call<User> callUsers = serviceAPI.isPassCorrect(newUser);
         callUsers.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User userResponse=response.body();
-                Log.i("info","sucess::: "+response.body());
-                Toast.makeText(getView().getContext(),"login succeeded",Toast.LENGTH_LONG);
-                Intent intent=new Intent(getContext(),Exams.class);
-                session = new SessionManager(getContext());
-                session.createLoginSession(userResponse.getUsername(),userResponse.getEmail() );
-                startActivity(intent);
+                if(response.isSuccessful()){
+                    User userResponse=response.body();
+                    Log.i("info","sucess::: "+response.body());
+                    Toast.makeText(getView().getContext(),"login succeeded",Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(getContext(),MenuHomeScreenActivity.class);
+                    session = new SessionManager(getContext());
+                    session.createLoginSession(userResponse);
+                    startActivity(intent);
+                }
+                else {
+                    Log.e("error","error in connection");
+                    Toast.makeText(getView().getContext(),"login failed",Toast.LENGTH_LONG).show();
+                }
             }
+
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e("error","error in connection"+t);
-                Toast.makeText(getView().getContext(),"login failed",Toast.LENGTH_LONG);
+                Toast.makeText(getView().getContext(),"login failed",Toast.LENGTH_LONG).show();
             }
         });
 
-         */
+
     }
 }

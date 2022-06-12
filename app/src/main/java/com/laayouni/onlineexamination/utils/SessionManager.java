@@ -24,11 +24,11 @@ public class SessionManager {
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
     // User name
-    public static final String KEY_NAME = "name";
+    public static final String KEY_NAME = "fullname";
     // Email address
     public static final String KEY_EMAIL = "email";
     // Object User
-    public static final String KEY_USER = "user";
+    public static final String KEY_USERNAME = "username";
 
 
     // Constructor
@@ -45,12 +45,13 @@ public class SessionManager {
     public void createLoginSession(User user) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
-        // Storing name in pref
-        editor.putString(KEY_NAME, user.getUsername());
-        // Storing email in pref
+        // Storing username
+        editor.putString(KEY_USERNAME, user.getUsername());
+        // Storing email 
         editor.putString(KEY_EMAIL, user.getEmail());
+        // storing fullname
+        editor.putString(KEY_NAME, user.getFullname());
 
-        editor.putString(KEY_USER, user.getEmail());
         // commit changes
         editor.commit();
     }
@@ -81,12 +82,14 @@ public class SessionManager {
      */
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> user = new HashMap<String, String>();
-        // user name
+        // user fullname
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
 
         // user email id
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
 
+        // username
+        user.put(KEY_USERNAME,pref.getString(KEY_USERNAME,null));
         // return user
         return user;
     }

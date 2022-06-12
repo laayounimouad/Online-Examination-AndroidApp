@@ -76,16 +76,22 @@ public class RegisterFragment extends Fragment {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.155.158:8080/api/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.41.158:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson)).build();
         RestServiceApi serviceAPI = retrofit.create(RestServiceApi.class);
         Call<User> callUsers = serviceAPI.createUser(user);
         callUsers.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User userResponse=response.body();
-                Log.i("info","sucess::: "+userResponse.getId());
-                Toast.makeText(getView().getContext(),"account created!\n You can login now",Toast.LENGTH_LONG);
+                if(response.isSuccessful()){
+                    User userResponse=response.body();
+                    Log.i("info","sucess::: "+userResponse.getId());
+                    Toast.makeText(getView().getContext(),"account created!\n You can login now",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Log.e("error","error in connection");
+                    Toast.makeText(getView().getContext(),"account created!\n You can login now",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

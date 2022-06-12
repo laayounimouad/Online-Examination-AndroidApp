@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class Choice implements Serializable {
     private Long id;
     private String choice;
-    private boolean isAnswer;
+    private boolean answer;
     private Question question;
 
-    public Choice(String choice, boolean isAnswer) {
+    public Choice(String choice, boolean answer) {
         this.choice = choice;
-        this.isAnswer = isAnswer;
+        this.answer = answer;
     }
 
     public Long getId() {
@@ -30,11 +30,11 @@ public class Choice implements Serializable {
     }
 
     public boolean isAnswer() {
-        return isAnswer;
+        return answer;
     }
 
     public void setAnswer(boolean answer) {
-        isAnswer = answer;
+        answer = answer;
     }
 
     public Question getQuestion() {
